@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 class Battleship
 {
@@ -8,14 +7,15 @@ class Battleship
     char[,] playerBoard = new char[Size, Size];
     char[,] computerBoard = new char[Size, Size];
     bool[,] computerShips = new bool[Size, Size];
-    List<(string name, int size)> shipTypes = new() {
-        ("Carrier", 5), ("Battleship", 4), ("Cruiser", 3),
-        ("Submarine", 3), ("Destroyer", 2)
-    };
+
+    // Ship definitions (names and sizes)
+    string[] shipNames = { "Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer" };
+    int[] shipSizes = { 5, 4, 3, 3, 2 };
+
     int totalShipCells = 0;
     int playerHits = 0;
     int computerHits = 0;
-    Random rand = new();
+    Random rand = new Random();
 
     static void Main() => new Battleship().Start();
 
@@ -124,8 +124,10 @@ class Battleship
             Console.WriteLine("\u001b[33mYou'll be asked to place each ship by choosing a starting coordinate and direction.\u001b[0m");
         }
 
-        foreach (var (name, size) in shipTypes)
+        for (int s = 0; s < shipNames.Length; s++)
         {
+            string name = shipNames[s];
+            int size = shipSizes[s];
             bool placed = false;
             while (!placed)
             {
