@@ -28,13 +28,15 @@ namespace masterMind
             while (isPlaying)
             {
                 string playerGuess = Console.ReadLine();
-                int[] playerConvertedArray[] = int.Parse(playerGuess);
+                //int[] playerConvertedArray[] = int.Parse(playerGuess);
 
                 int result = 0;
 
+                //Problem ligger i at playerGuess er en string a chars som alle har et nummer bag sig som den kigger på. Bliver nødt til at splitte array og lave til int
                 for (int i = 0; i < arrayGenerated.Length; i++)
                 {
-                    if (playerGuess[i] == arrayGenerated[i])
+                    Console.WriteLine((int)playerGuess[i]);
+                    if ( (int)playerGuess[i] == arrayGenerated[i])
                     {
                         result = +1;
                     }
