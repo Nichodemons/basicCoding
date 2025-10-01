@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Design;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
 namespace masterMind
@@ -11,6 +12,9 @@ namespace masterMind
             Console.WriteLine("The Computer will generate 4 random numbers between 1 - 2");
             Console.WriteLine("Numbers can repeat. An example: 2-2-1-2");
             bool isPlaying = true;
+            
+            while (isPlaying)
+            { 
             int rndNumber1 = new Random().Next(1, 4);
             int rndNumber2 = new Random().Next(1, 4);
             int rndNumber3 = new Random().Next(1, 4);
@@ -18,48 +22,54 @@ namespace masterMind
 
             int[] arrayGenerated = new int[] {rndNumber1, rndNumber2, rndNumber3, rndNumber4};
 
-            //write out array for testing purposes
-            for (int i = 0; i < arrayGenerated.Length; i++)
-            {
-                Console.Write(arrayGenerated[i]);
-            }
-            Console.WriteLine();
+            //convert to string
+            string arrayConvertToString = String.Join("", arrayGenerated.Select(p => p.ToString()).ToArray());
 
-            while (isPlaying)
-            {
+            //write out array for testing purposes
+            //for (int i = 0; i < arrayGenerated.Length; i++)
+            //{
+            //    Console.Write(arrayGenerated[i]);
+            //}
+            Console.WriteLine();
+            Console.WriteLine("Make a guess, or type q to quit");
+
+                while (true)
+                {
                 string playerGuess = Console.ReadLine();
-                //int[] playerConvertedArray[] = int.Parse(playerGuess);
 
                 int result = 0;
 
-                //Problem ligger i at playerGuess er en string a chars som alle har et nummer bag sig som den kigger på. Bliver nødt til at splitte array og lave til int
-                for (int i = 0; i < arrayGenerated.Length; i++)
-                {
-                    Console.WriteLine((int)playerGuess[i]);
-                    if ( (int)playerGuess[i] == arrayGenerated[i])
+                    //Look if what player typed is invalid
+                    for (int i = 0; i < arrayGenerated.Length; i++)
                     {
-                        result = +1;
-                    }
-                    else
-                    {
-                        result = result;
-                    }
+                        if ((int)playerGuess[i] == arrayConvertToString[i])
+                        {
+                        result = result + 1;
                         }
+                        else
+                        {
+                        result = result;
+                        }
+
+                    }
                     Console.WriteLine("you have " + result + " correct");
-                    result = 0;
-                    Console.WriteLine("type q to quit or anything else to continue");
-
-                    if (Console.ReadLine() == "q")
-                    {
-                        isPlaying = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Guess again");
-                    }
-
+                if (result == 4)
+                {
+                    Console.WriteLine("You win!");
                 }
-                Console.ReadLine();
+                else
+                {
+                        Console.WriteLine("Guess Again, or Type Q to quit");
+                        result = 0;
+                }
+
+                if (playerGuess == "q")
+                {
+                        isPlaying = false;
+                        break;
+                    }
+                }
+            }
             }
         }
     }
