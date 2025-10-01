@@ -9,8 +9,8 @@ namespace masterMind
         static void Main(string[] args)
         {
             Console.WriteLine("Hello and welcome to MasterMind");
-            Console.WriteLine("The Computer will generate 4 random numbers between 1 - 2");
-            Console.WriteLine("Numbers can repeat. An example: 2-2-1-2");
+            Console.WriteLine("The Computer will generate 4 random numbers between 1 - 3");
+            Console.WriteLine("Numbers can repeat. An example: 2312");
             bool isPlaying = true;
             
             while (isPlaying)
@@ -30,16 +30,20 @@ namespace masterMind
             //{
             //    Console.Write(arrayGenerated[i]);
             //}
-            Console.WriteLine();
-            Console.WriteLine("Make a guess, or type q to quit");
+            
+                Console.WriteLine();
+                Console.WriteLine("Make a guess, or type quit to quit");
 
+                int playerTries = 0;
                 while (true)
                 {
                 string playerGuess = Console.ReadLine();
-
-                int result = 0;
+                    playerTries = playerTries + 1;
+                    int result = 0;
 
                     //Look if what player typed is invalid
+                    if (playerGuess.Length == 4)
+                    {
                     for (int i = 0; i < arrayGenerated.Length; i++)
                     {
                         if ((int)playerGuess[i] == arrayConvertToString[i])
@@ -50,21 +54,30 @@ namespace masterMind
                         {
                         result = result;
                         }
-
                     }
                     Console.WriteLine("you have " + result + " correct");
                 if (result == 4)
                 {
                     Console.WriteLine("You win!");
+                            Console.WriteLine("You used " + playerTries + " tries");
+                            playerTries = 0;
+                            break;
                 }
-                else
+                        else
                 {
-                        Console.WriteLine("Guess Again, or Type Q to quit");
+                        Console.WriteLine("Guess Again, or Type quit to quit");
                         result = 0;
                 }
 
-                if (playerGuess == "q")
-                {
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Answer, type again");
+                        continue;
+                    }
+
+                if (playerGuess == "quit")
+                    {
                         isPlaying = false;
                         break;
                     }
