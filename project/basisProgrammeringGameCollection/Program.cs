@@ -45,8 +45,10 @@
                         Console.WriteLine("Numbers can repeat. An example: 2312");
                         bool isPlaying = true;
 
+                        //Main Loop
                         while (isPlaying)
                         {
+                            //Generate numbers for array
                             int rndNumber1 = new Random().Next(1, 4);
                             int rndNumber2 = new Random().Next(1, 4);
                             int rndNumber3 = new Random().Next(1, 4);
@@ -57,16 +59,12 @@
                             //convert to string
                             string arrayConvertToString = String.Join("", arrayGenerated.Select(p => p.ToString()).ToArray());
 
-                            //write out array for testing purposes
-                            //for (int i = 0; i < arrayGenerated.Length; i++)
-                            //{
-                            //    Console.Write(arrayGenerated[i]);
-                            //}
-
                             Console.WriteLine();
                             Console.WriteLine("Make a guess, or type quit to quit");
 
                             int playerTries = 0;
+
+                            //Loop for guessing
                             while (true)
                             {
                                 string playerGuess = Console.ReadLine();
@@ -76,6 +74,7 @@
                                 //Look if what player typed is invalid
                                 if (playerGuess.Length == 4)
                                 {
+                                    //Check each number
                                     for (int i = 0; i < arrayGenerated.Length; i++)
                                     {
                                         if ((int)playerGuess[i] == arrayConvertToString[i])
@@ -88,6 +87,8 @@
                                         }
                                     }
                                     Console.WriteLine("you have " + result + " correct");
+                                    
+                                    //If guessed correctly
                                     if (result == 4)
                                     {
                                         Console.WriteLine("You win!");
@@ -102,12 +103,15 @@
                                     }
 
                                 }
+                                
+                                //If answer is invalid
                                 else
                                 {
                                     Console.WriteLine("Invalid Answer, type again");
                                     continue;
                                 }
 
+                                //Quit if player typed quit
                                 if (playerGuess == "quit")
                                 {
                                     isPlaying = false;
