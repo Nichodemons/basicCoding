@@ -191,8 +191,8 @@
                             PrintBoard(playerBoard, showShips: true);
                             Console.WriteLine("\nEnemy Board:");
                             PrintBoard(computerBoard, showShips: true);
-                                                
-                        break;
+
+                        return;
 
                 case "3":
                         Console.WriteLine("3");
