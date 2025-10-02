@@ -80,9 +80,9 @@ namespace masterMind
                     {
                         isPlaying = false;
                         break;
+                        }
                     }
                 }
-            }
             }
         }
     }
